@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Personal Finance Advisor Bot - AI-powered budgeting, spending analysis and saving suggestions."
+    >
+
+    <title>Personal Finance Advisor Bot</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="/" class="brand" aria-label="Personal Finance Advisor Bot Home">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <div class="brand-text">
+                    <span class="brand-name">Finance Advisor</span>
+                    <span class="brand-tagline">
+                        Smart money decisions, made simple.
+                    </span>
+                </div>
+
+            </a>
+
+            <div class="header-status">
+                <span class="status-dot"></span>
+                <span>AI Advisor Online</span>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+
+            <div class="container hero-content">
+
+                <div class="hero-badge">
+                    <i class="fa-solid fa-sparkles"></i>
+                    AI-Powered Financial Planning
+                </div>
+
+                <h1>
+                    Take control of your
+                    <span>financial future.</span>
+                </h1>
+
+                <p>
+                    Enter your monthly income, expenses and financial goal.
+                    Our AI advisor will create a personalized budget,
+                    analyze your spending and suggest practical ways to save.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FINANCE INPUT SECTION
+        ========================== -->
+        <section class="finance-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">01 — Your finances</span>
+
+                        <h2>
+                            Tell us about your month
+                        </h2>
+
+                        <p>
+                            Provide a few details and we'll build your
+                            personalized financial plan.
+                        </p>
+                    </div>
+
+                    <div class="heading-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+                <form id="financeForm" class="finance-form" novalidate>
+
+                    <!-- INCOME -->
+                    <div class="form-card income-card">
+
+                        <div class="form-card-header">
+
+                            <div class="form-icon">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                            </div>
+
+                            <div>
+                                <h3>Monthly Income</h3>
+                                <p>Your total income for the month</p>
+                            </div>
+
+                        </div>
+
+                        <label for="income">
+                            Monthly income
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-wrapper currency-input">
+
+                            <span class="currency-symbol">₹</span>
+
+                            <input
+                                type="number"
+                                id="income"
+                                name="income"
+                                min="1"
+                                step="0.01"
+                                placeholder="e.g. 50000"
+                                required
+                                aria-required="true"
+                            >
+
+                        </div>
+
+                        <small class="input-help">
+                            Enter your monthly take-home income.
+                        </small>
+
+                    </div>
+
+
+                    <!-- EXPENSES -->
+                    <div class="form-card expenses-card">
+
+                        <div class="form-card-header">
+
+                            <div class="form-icon">
+                                <i class="fa-solid fa-receipt"></i>
+                            </div>
+
+                            <div>
+                                <h3>Monthly Expenses</h3>
+                                <p>Add your spending by category</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="expense-grid">
+
+                            <!-- RENT -->
+                            <div class="expense-field">
+
+                                <label for="rent">
+                                    <i class="fa-solid fa-house"></i>
+                                    Rent
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="rent"
+                                        name="rent"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- FOOD -->
+                            <div class="expense-field">
+
+                                <label for="food">
+                                    <i class="fa-solid fa-utensils"></i>
+                                    Food
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="food"
+                                        name="food"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TRANSPORT -->
+                            <div class="expense-field">
+
+                                <label for="transport">
+                                    <i class="fa-solid fa-car"></i>
+                                    Transport
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="transport"
+                                        name="transport"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DINING -->
+                            <div class="expense-field">
+
+                                <label for="dining">
+                                    <i class="fa-solid fa-bowl-food"></i>
+                                    Dining
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="dining"
+                                        name="dining"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ENTERTAINMENT -->
+                            <div class="expense-field">
+
+                                <label for="entertainment">
+                                    <i class="fa-solid fa-film"></i>
+                                    Entertainment
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="entertainment"
+                                        name="entertainment"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- UTILITIES -->
+                            <div class="expense-field">
+
+                                <label for="utilities">
+                                    <i class="fa-solid fa-bolt"></i>
+                                    Utilities
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="utilities"
+                                        name="utilities"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- SAVINGS -->
+                            <div class="expense-field">
+
+                                <label for="savings">
+                                    <i class="fa-solid fa-piggy-bank"></i>
+                                    Savings
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="savings"
+                                        name="savings"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- OTHER -->
+                            <div class="expense-field">
+
+                                <label for="other">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                    Other
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="currency-symbol">₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="other"
+                                        name="other"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <small class="input-help">
+                            Enter at least one expense category.
+                        </small>
+
+                    </div>
+
+
+                    <!-- FINANCIAL GOAL -->
+                    <div class="form-card goal-card">
+
+                        <div class="form-card-header">
+
+                            <div class="form-icon">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+
+                            <div>
+                                <h3>Financial Goal</h3>
+                                <p>What are you working towards?</p>
+                            </div>
+
+                        </div>
+
+
+                        <label for="goal">
+                            Choose your primary goal
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select id="goal" name="goal">
+
+                                <option value="emergency fund">
+                                    Emergency Fund
+                                </option>
+
+                                <option value="vacation">
+                                    Vacation
+                                </option>
+
+                                <option value="gadget purchase">
+                                    Gadget Purchase
+                                </option>
+
+                                <option value="investment">
+                                    Investment
+                                </option>
+
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+                    <div class="form-submit-area">
+
+                        <button
+                            type="submit"
+                            id="analyseButton"
+                            class="analyse-button"
+                        >
+
+                            <span class="button-content">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span>Analyse My Finances</span>
+                            </span>
+
+                            <span
+                                class="button-loader"
+                                id="buttonLoader"
+                                aria-hidden="true"
+                            >
+                                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                            </span>
+
+                        </button>
+
+                        <p class="privacy-note">
+                            <i class="fa-solid fa-lock"></i>
+                            Your financial information is processed securely.
+                        </p>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RESULTS SECTION
+        ========================== -->
+        <section
+            id="resultsSection"
+            class="results-section"
+            aria-live="polite"
+        >
+
+            <div class="container">
+
+                <!-- RESULTS HEADER -->
+                <div class="results-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            02 — Your financial plan
+                        </span>
+
+                        <h2>
+                            Your AI-powered financial insights
+                        </h2>
+
+                        <p id="resultsSummary">
+                            Your personalized results will appear here.
+                        </p>
+
+                    </div>
+
+                    <div class="results-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+
+                </div>
+
+
+                <!-- FINANCIAL SUMMARY -->
+                <div
+                    id="financialSummary"
+                    class="financial-summary"
+                >
+                    <!-- Generated by JavaScript -->
+                </div>
+
+
+                <!-- RESULTS GRID -->
+                <div class="results-grid">
+
+                    <!-- =====================
+                         BUDGET
+                    ====================== -->
+                    <div class="result-card budget-result-card">
+
+                        <div class="result-card-header">
+
+                            <div>
+
+                                <span class="result-label">
+                                    MONTHLY BUDGET
+                                </span>
+
+                                <h3>
+                                    Recommended allocation
+                                </h3>
+
+                            </div>
+
+                            <div class="result-card-icon">
+                                <i class="fa-solid fa-chart-column"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="budgetContainer"
+                            class="budget-container"
+                        >
+                            <!-- Budget cards generated by JavaScript -->
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================
+                         ANALYSIS + SUGGESTIONS
+                    ====================== -->
+                    <div class="results-side">
+
+                        <!-- SPENDING ANALYSIS -->
+                        <div class="result-card analysis-card">
+
+                            <div class="result-card-header">
+
+                                <div>
+
+                                    <span class="result-label">
+                                        SPENDING ANALYSIS
+                                    </span>
+
+                                    <h3>
+                                        Where your money goes
+                                    </h3>
+
+                                </div>
+
+                                <div class="result-card-icon">
+                                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="analysisContainer"
+                                class="analysis-container"
+                            >
+                                <!-- Analysis chips generated by JavaScript -->
+                            </div>
+
+                        </div>
+
+
+                        <!-- SAVING SUGGESTIONS -->
+                        <div class="result-card suggestions-card">
+
+                            <div class="result-card-header">
+
+                                <div>
+
+                                    <span class="result-label">
+                                        SMART SAVINGS
+                                    </span>
+
+                                    <h3>
+                                        Suggestions for you
+                                    </h3>
+
+                                </div>
+
+                                <div class="result-card-icon">
+                                    <i class="fa-solid fa-piggy-bank"></i>
+                                </div>
+
+                            </div>
+
+
+                            <ol
+                                id="suggestionsContainer"
+                                class="suggestions-container"
+                            >
+                                <!-- Suggestions generated by JavaScript -->
+                            </ol>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             HOW IT WORKS
+        ========================== -->
+        <section class="how-section">
+
+            <div class="container">
+
+                <div class="section-heading centered">
+
+                    <span class="section-label">
+                        03 — Simple process
+                    </span>
+
+                    <h2>
+                        Financial clarity in three steps
+                    </h2>
+
+                    <p>
+                        No complicated spreadsheets. Just enter your
+                        information and let your AI advisor help.
+                    </p>
+
+                </div>
+
+
+                <div class="steps-grid">
+
+                    <!-- STEP 1 -->
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <div class="step-icon">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+
+                        <h3>
+                            Enter your details
+                        </h3>
+
+                        <p>
+                            Add your monthly income, spending categories
+                            and financial goal.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STEP 2 -->
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <div class="step-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+
+                        <h3>
+                            AI analyses
+                        </h3>
+
+                        <p>
+                            The financial advisor evaluates your spending
+                            and creates a personalized plan.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STEP 3 -->
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            03
+                        </div>
+
+                        <div class="step-icon">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+
+                        <h3>
+                            Improve & save
+                        </h3>
+
+                        <p>
+                            Follow practical recommendations to manage
+                            expenses and work towards your goals.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="site-footer">
+
+        <div class="container footer-inner">
+
+            <div class="footer-brand">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Finance Advisor
+                    </strong>
+
+                    <span>
+                        Personal Finance Advisor Bot
+                    </span>
+                </div>
+
+            </div>
+
+
+            <p>
+                AI-powered financial planning for smarter money decisions.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Main JavaScript -->
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}"
+    ></script>
+
+</body>
+</html>
